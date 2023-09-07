@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property $id
  * @property $nombre
  * @property $apellidos
+ * @property $carnet
+ * @property $DPI
  * @property $correo
  * @property $numero_personal
  * @property $numero_domiciliar
@@ -19,7 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property $created_at
  * @property $updated_at
  *
- *  @property Postulacione[] $postulaciones
+ *  @property Postulacion[] $postulaciones
  *
  * @property Carrera $carrera
  * @property Residencia $residencia
@@ -29,7 +31,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Estudiante extends Model
 {
-    
+
     static $rules = [
 		'nombre' => 'required',
 		'apellidos' => 'required',
@@ -50,7 +52,7 @@ class Estudiante extends Model
      *
      * @var array
      */
-    protected $fillable = ['nombre','apellidos','correo','numero_personal','numero_domiciliar','curriculum','residencia_id','carrera_id', 'user_id'];
+    protected $fillable = ['nombre','apellidos','carnet','DPI','correo','numero_personal','numero_domiciliar','curriculum','residencia_id','carrera_id', 'user_id'];
 
 
      /**
@@ -58,7 +60,7 @@ class Estudiante extends Model
      */
     public function postulaciones()
     {
-        return $this->hasMany('App\Models\Postulacione', 'empresa_id', 'id');
+        return $this->hasMany('App\Models\Postulacion', 'empresa_id', 'id');
     }
 
     /**
@@ -68,7 +70,7 @@ class Estudiante extends Model
     {
         return $this->hasOne('App\Models\Carrera', 'id', 'carrera_id');
     }
-    
+
     public function user(){
         return $this->belongsTo('App\Models\User', 'id', 'user_id');
     }
@@ -80,6 +82,6 @@ class Estudiante extends Model
     {
         return $this->hasOne('App\Models\Residencia', 'id', 'residencia_id');
     }
-    
+
 
 }
