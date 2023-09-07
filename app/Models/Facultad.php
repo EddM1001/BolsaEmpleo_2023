@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property $id
  * @property $facultad
+ * @property $Estado
  * @property $created_at
  * @property $updated_at
  *
@@ -17,7 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Facultad extends Model
 {
-    
+
     static $rules = [
 		'facultad' => 'required',
         'Estado' => 'required',
@@ -30,10 +31,10 @@ class Facultad extends Model
      *
      * @var array
      */
-    protected $fillable = ['facultad'];
+    protected $fillable = ['facultad', 'Estado'];
 
     public function ofertas()
     {
-        return $this->hasMany('App\Models\Oferta', 'facultad_id', 'id');
+        return $this->hasMany('App\Models\oferta', 'facultad_id', 'id');
     }
 }
